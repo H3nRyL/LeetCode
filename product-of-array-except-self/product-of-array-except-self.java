@@ -7,9 +7,9 @@ class Solution {
             result[i] = result[i - 1] * nums[i - 1];
         
         int right = 1;
-        for (int i = nums.length - 2; i >= 0; i--) {
-            right *= nums[i + 1];
+        for (int i = nums.length - 1; i >= 0; i--) {
             result[i] *= right;
+            right *= nums[i]; 
         }
         
         return result;
