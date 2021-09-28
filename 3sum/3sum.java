@@ -10,13 +10,13 @@ class Solution {
                     int complement = -nums[i] - nums[j];
                     if (seen.contains(complement)) {
                         result.add(Arrays.asList(nums[i], nums[j], complement));
-                        while (j + 1< nums.length && nums[j] == nums[j + 1])
+                        while (j + 1 < nums.length && nums[j] == nums[j + 1])
                             j++;
                     }
                     seen.add(nums[j]);
                 }
             }
-        } 
+        }
         
         return result;
     }
