@@ -12,13 +12,13 @@ class Solution {
         }
         
         if (open < max) {
-            sb.append("(");
+            sb.append('(');
             backtrack(result, sb, open + 1, close, max);
             sb.deleteCharAt(sb.length() - 1);
         }
         
         if (close < open) {
-            sb.append(")");
+            sb.append(')');
             backtrack(result, sb, open, close + 1, max);
             sb.deleteCharAt(sb.length() - 1);
         }
