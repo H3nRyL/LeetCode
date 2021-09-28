@@ -5,7 +5,7 @@ class Solution {
         if (s.length() < 2)
             return s;
         
-        for (int i = 0; i < s.length() - 1; i++) {
+        for (int i = 0; i < s.length(); i++) {
             extendPalindrome(s, i, i);
             extendPalindrome(s, i, i + 1);
         }
@@ -13,15 +13,15 @@ class Solution {
         return s.substring(lo, lo + maxLen);
     }
     
-    private void extendPalindrome(String s, int j, int k) {
-        while (j >= 0 && k < s.length() && s.charAt(j) == s.charAt(k)) {
-            j--;
-            k++;
+    private void extendPalindrome(String str, int left, int right) {
+        while (left >= 0 && right < str.length() && str.charAt(left) == str.charAt(right)) {
+            left--;
+            right++;
         }
         
-        if (maxLen < k - j - 1) {
-            lo = j + 1;
-            maxLen = k - j - 1;
+        if (maxLen < right - left - 1) {
+            lo = left + 1;
+            maxLen = right - left - 1;
         }
     }
 }
