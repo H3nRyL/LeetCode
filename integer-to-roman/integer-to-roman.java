@@ -5,7 +5,7 @@ class Solution {
         StringBuilder sb = new StringBuilder();
         
         for (int i = 0; i < values.length && num > 0; i++) {
-            while (values[i] <= num) {
+            while (num >= values[i]) {
                 num -= values[i];
                 sb.append(symbols[i]);
             }
