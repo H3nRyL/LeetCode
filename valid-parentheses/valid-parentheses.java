@@ -1,26 +1,23 @@
 class Solution {
-    private Map<Character, Character> map = new HashMap<>();
-    
-    public Solution() {
+    public boolean isValid(String s) {
+        Map<Character, Character> map = new HashMap<>();
         map.put(')', '(');
         map.put(']', '[');
         map.put('}', '{');
-    }
-    
-    public boolean isValid(String s) {
+        
         Stack<Character> stack = new Stack<>();
         
         for (int i = 0; i < s.length(); i++) {
             char temp = s.charAt(i);
             
             if (map.containsKey(temp)) {
-                char top = stack.empty() ? '#' : stack.pop();
+                char top = stack.isEmpty() ? '#' : stack.pop();
                 
                 if (top != map.get(temp))
                     return false;
-                
-            } else
+            } else {
                 stack.push(temp);
+            }
         }
         
         return stack.isEmpty();
