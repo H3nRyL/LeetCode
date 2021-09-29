@@ -10,10 +10,11 @@ class Solution {
         }
         
         for (int i = 0; i < nums.length; i++) {
-            int complent = target - nums[i];
-            if (map.containsKey(complent) && map.get(complent) != i)
-                return new int[]{i, map.get(complent)};
+            int complement = target - nums[i];
+            if (map.containsKey(complement) && map.get(complement) != i)
+                return new int[]{i, map.get(complement)};
         }
-        throw new IllegalArgumentException("No two sum found!");
+        
+        return null; 
     }
 }
