@@ -1,42 +1,33 @@
 class Solution {
     public boolean isRobotBounded(String instructions) {
-        int x = 0, y = 0;
-        int direction = 0;
+        int x = 0;
+        int y = 0;
+        int direction = 1;
         
         for (int i = 0; i < instructions.length(); i++) {
-            if (instructions.charAt(i) == 'L') {
-                if (direction == 3)
-                    direction = 0;
-                else
-                    direction++;
-            } else if (instructions.charAt(i) == 'R') {
-                if (direction == 0)
-                    direction = 3;
-                else
-                    direction--;
-            } else {
+            char curr = instructions.charAt(i);
+            if (curr == 'L') 
+                direction = (direction == 1) ? 4 : direction - 1;
+            else if (curr == 'R')
+                direction = (direction == 4) ? 1 : direction + 1;
+            else {
                 switch (direction) {
-                    case 0:
+                    case 1:
                         y++;
                         break;
-                    case 1:
-                        x--;
-                        break;
                     case 2:
-                        y--;
+                        x++;
                         break;
                     case 3:
-                        x++;
+                        y--;
+                        break;
+                    case 4:
+                        x--;
                         break;
                 }
             }
         }
         
-        if (direction == 0) {
-            if (x != 0 || y != 0)
-                return false;      
-        } 
-        
-        return true;
+        return (x == 0 && y == 0) || direction != 1; 
     }
 }
