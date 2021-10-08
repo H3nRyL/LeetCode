@@ -1,5 +1,5 @@
 class Solution {
-    public int subarraySum(int[] nums, int k) {        
+    public int subarraySum(int[] nums, int k) {
         int result = 0;
         Map<Integer, Integer> map = new HashMap<>();
         int sum = 0;
@@ -9,7 +9,7 @@ class Solution {
             sum += nums[i];
             if (map.containsKey(sum - k))
                 result += map.get(sum - k);
-            map.put(sum, map.getOrDefault(sum, 0) + 1);            
+            map.put(sum, map.getOrDefault(sum, 0) + 1);
         }
         
         return result;
