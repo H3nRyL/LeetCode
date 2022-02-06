@@ -4,11 +4,9 @@ class Solution {
         int right = s.length() - 1;
         
         while (left < right) {
-            if (s.charAt(left) != s.charAt(right)) {
-                if (validSubPalindrome(s, left + 1, right))
-                    return true;
-                return validSubPalindrome(s, left, right - 1);
-            }
+            if (s.charAt(left) != s.charAt(right))                 
+                return validSubPalindrome(s, left + 1, right) || validSubPalindrome(s, left, right - 1);
+            
             left++;
             right--;
         }
