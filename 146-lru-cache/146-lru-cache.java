@@ -35,7 +35,7 @@ class LRUCache {
         return res;
     }
     
-    private Hashtable<Integer, DLinkedNode> cache = new Hashtable<>();
+    private HashMap<Integer, DLinkedNode> cache = new HashMap<>();
     private int count;
     private int capacity;
     private DLinkedNode head, tail;
