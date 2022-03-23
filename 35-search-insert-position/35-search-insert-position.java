@@ -6,7 +6,7 @@ class Solution {
         int start = 0;
         int end = nums.length - 1;
         
-        while (start < end) {
+        while (start <= end) {
             int mid = start + (end - start) / 2;
             if (nums[mid] == target)
                 return mid;
@@ -16,9 +16,6 @@ class Solution {
                 end = mid - 1;
         }
         
-        if (target > nums[start])
-            return start + 1;
-        else 
-            return start;
+        return start;
     }
 }
