@@ -1,88 +1,85 @@
-import java.util.Hashtable;
 class LRUCache {
 
     class DLinkedNode {
         int key;
         int value;
-        DLinkedNode pre;
-        DLinkedNode post;
+        DLinkedNode prev;
+        DLinkedNode next;
     }
     
     private void addNode(DLinkedNode node) {
-        node.pre = head;
-        node.post = head.post;
+        node.prev = head;
+        node.next = head.next;
         
-        head.post.pre = node;
-        head.post = node;
+        head.next.prev = node;
+        head.next = node;
     }
     
     private void removeNode(DLinkedNode node) {
-        DLinkedNode pre = node.pre;
-        DLinkedNode post = node.post;
+        DLinkedNode prev = node.prev;
+        DLinkedNode next = node.next;
         
-        pre.post = post;
-        post.pre = pre;
+        node.prev.next = next;
+        node.next.prev = prev;
     }
     
     private void moveToHead(DLinkedNode node) {
-        this.removeNode(node);
-        this.addNode(node);
+        removeNode(node);
+        addNode(node);
     }
     
     private DLinkedNode popTail() {
-        DLinkedNode res = tail.pre;
-        this.removeNode(res);
-        return res;
+        DLinkedNode result = tail.prev;
+        removeNode(result);
+        return result;
     }
     
-    private HashMap<Integer, DLinkedNode> cache = new HashMap<>();
-    private int count;
+    private Map<Integer, DLinkedNode> cache = new HashMap<>();
+    private int size;
     private int capacity;
     private DLinkedNode head, tail;
     
     public LRUCache(int capacity) {
-        this.count = 0;
+        this.size = 0;
         this.capacity = capacity;
         
         head = new DLinkedNode();
-        head.pre = null;
-        
         tail = new DLinkedNode();
-        tail.post = null;
         
-        head.post = tail;
-        tail.pre = head;
+        head.next = tail;
+        tail.prev = head;
     }
     
     public int get(int key) {
         DLinkedNode node = cache.get(key);
-        if (node == null)
+        if (node == null) 
             return -1;
         
-        this.moveToHead(node);
+        moveToHead(node);
         return node.value;
     }
     
     public void put(int key, int value) {
         DLinkedNode node = cache.get(key);
+        
         if (node == null) {
             DLinkedNode newNode = new DLinkedNode();
             newNode.key = key;
             newNode.value = value;
             
-            this.cache.put(key, newNode);
-            this.addNode(newNode);
+            cache.put(key, newNode);
+            addNode(newNode);
             
-            count++;
+            size++;
             
-            if (count > capacity) {
-                DLinkedNode tail = this.popTail();
-                this.cache.remove(tail.key);
-                count--;
+            if (size > capacity) {
+                DLinkedNode tail = popTail();
+                cache.remove(tail.key);
+                size--;
             }
         } else {
             node.value = value;
-            this.moveToHead(node);
+            moveToHead(node);
         }
     }
 }
