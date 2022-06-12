@@ -18,11 +18,18 @@ class Solution {
     public int pickIndex() {
         double target = this.totalSum * Math.random();
         
-        for (int i = 0; i < this.prefixSums.length; i++)
-            if (target < this.prefixSums[i])
-                return i;
+        int lo = 0;
+        int hi = this.prefixSums.length;
         
-        return -1;
+        while (lo < hi) {
+            int mid = lo + (hi - lo) / 2;
+            if (target > this.prefixSums[mid])
+                lo = mid + 1;
+            else 
+                hi = mid;
+        }
+        
+        return lo;
     }
 }
 
